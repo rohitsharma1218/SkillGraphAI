@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SkillGraph AI</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 680px; margin: 40px auto; padding: 0 18px; color: #182230; }
+    h1 { margin-bottom: 8px; }
+    p { color: #526071; }
+    form { display: grid; gap: 14px; margin-top: 24px; }
+    label { display: grid; gap: 6px; font-weight: 600; }
+    input { padding: 10px; border: 1px solid #b8c2cc; border-radius: 6px; font: inherit; }
+    button { padding: 11px; border: 0; border-radius: 6px; background: #2457c5; color: white; font-size: 1rem; cursor: pointer; }
+    .message { padding: 12px; border-radius: 6px; margin-top: 18px; }
+    .error { background: #fff0f0; color: #9d1c1c; }
+    .success { background: #effaf2; color: #176534; }
+  </style>
+</head>
+<body>
+  <h1>SkillGraph AI</h1>
+  <p>Enter your profile to begin exploring career guidance.</p>
+
+  <form method="post">
+    <label>
+      CGPA (0–10)
+      <input name="cgpa" type="number" min="0" max="10" step="0.01"
+             value="{{ profile.cgpa }}" required>
+    </label>
+
+    <label>
+      Technical skills (comma-separated)
+      <input name="skills" type="text" placeholder="Python, SQL, Machine Learning"
+             value="{{ profile.skills }}" required>
+    </label>
+
+    <label>
+      Number of projects
+      <input name="projects" type="number" min="0" step="1"
+             value="{{ profile.projects }}" required>
+    </label>
+
+    <label>
+      Number of internships
+      <input name="internships" type="number" min="0" step="1"
+             value="{{ profile.internships }}" required>
+    </label>
+
+    <label>
+      Number of certifications
+      <input name="certifications" type="number" min="0" step="1"
+             value="{{ profile.certifications }}" required>
+    </label>
+
+    <button type="submit">Submit profile</button>
+  </form>
+
+  {% if error %}
+    <div class="message error">{{ error }}</div>
+  {% endif %}
+
+  {% if submitted %}
+    <div class="message success">
+      Profile accepted. Career prediction and skill-gap analysis will be added in later phases.
+    </div>
+  {% endif %}
+</body>
+</html>
