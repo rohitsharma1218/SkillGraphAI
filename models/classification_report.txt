@@ -1,0 +1,28 @@
+                              precision    recall  f1-score   support
+
+               AI Researcher       0.30      0.27      0.28       138
+           Backend Developer       0.26      0.22      0.24       112
+            Business Analyst       0.34      0.33      0.34       141
+            Business Manager       0.38      0.36      0.37       147
+       Cybersecurity Analyst       0.38      0.38      0.38       143
+                Data Analyst       0.30      0.35      0.32       144
+              Data Scientist       0.35      0.30      0.32       143
+      Deep Learning Engineer       0.34      0.41      0.37       143
+Digital Marketing Specialist       0.30      0.29      0.30       141
+              Ethical Hacker       0.34      0.34      0.34       138
+          Frontend Developer       0.29      0.38      0.33       116
+        Full Stack Developer       0.21      0.17      0.19       111
+            Graphic Designer       0.32      0.28      0.30       136
+   Machine Learning Engineer       0.31      0.28      0.29       140
+         Marketing Executive       0.35      0.39      0.37       153
+          Operations Manager       0.37      0.34      0.35       140
+            Product Designer       0.36      0.42      0.39       143
+             Project Manager       0.36      0.40      0.38       145
+                 SEO Analyst       0.31      0.29      0.30       143
+           Security Engineer       0.34      0.34      0.34       145
+           Software Engineer       0.17      0.17      0.17       101
+              UI/UX Designer       0.37      0.36      0.37       137
+
+                    accuracy                           0.33      3000
+                   macro avg       0.32      0.32      0.32      3000
+                weighted avg       0.32      0.33      0.32      3000

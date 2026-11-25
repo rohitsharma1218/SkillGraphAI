@@ -1,0 +1,215 @@
+
+{
+  "careers": [
+    {
+      "name": "Data Scientist",
+      "category": "Data Science",
+      "description": "Uses statistics, programming and machine learning to extract insights from data and solve business problems.",
+      "technical_skills": ["Python", "SQL", "Statistics", "Pandas", "NumPy", "Machine Learning", "Data Visualization", "Scikit-learn"],
+      "soft_skills": ["Analytical Thinking", "Problem Solving", "Communication", "Critical Thinking"],
+      "qualifications": ["B.Tech", "B.Sc", "M.Sc", "M.Tech", "MCA"],
+      "recommended_learning": ["Python Programming", "Statistics and Probability", "SQL", "Data Analysis", "Machine Learning", "Real-world Data Projects"]
+    },
+    {
+      "name": "Data Analyst",
+      "category": "Data Science",
+      "description": "Analyzes datasets, creates reports and dashboards, and helps organizations make data-driven decisions.",
+      "technical_skills": ["Excel", "SQL", "Python", "Pandas", "Power BI", "Tableau", "Statistics", "Data Visualization"],
+      "soft_skills": ["Analytical Thinking", "Communication", "Attention to Detail", "Problem Solving"],
+      "qualifications": ["B.Tech", "B.Sc", "B.Com", "M.Sc", "MCA", "MBA"],
+      "recommended_learning": ["Advanced Excel", "SQL", "Statistics", "Python for Data Analysis", "Power BI", "Dashboard Projects"]
+    },
+    {
+      "name": "Machine Learning Engineer",
+      "category": "AI/ML",
+      "description": "Develops, trains and deploys machine learning models that solve practical problems.",
+      "technical_skills": ["Python", "Machine Learning", "Deep Learning", "NumPy", "Pandas", "Scikit-learn", "TensorFlow", "PyTorch", "SQL"],
+      "soft_skills": ["Problem Solving", "Analytical Thinking", "Critical Thinking", "Teamwork"],
+      "qualifications": ["B.Tech", "B.Sc", "M.Tech", "M.Sc", "MCA"],
+      "recommended_learning": ["Python", "Linear Algebra", "Statistics", "Machine Learning", "Deep Learning", "Model Deployment"]
+    },
+    {
+      "name": "AI Researcher",
+      "category": "AI/ML",
+      "description": "Researches new artificial intelligence techniques, develops algorithms and experiments with advanced AI models.",
+      "technical_skills": ["Python", "Mathematics", "Linear Algebra", "Statistics", "Machine Learning", "Deep Learning", "PyTorch", "Research Methodology"],
+      "soft_skills": ["Critical Thinking", "Research Skills", "Problem Solving", "Communication"],
+      "qualifications": ["B.Tech", "M.Tech", "M.Sc", "PhD"],
+      "recommended_learning": ["Advanced Mathematics", "Python", "Machine Learning", "Deep Learning", "Reading Research Papers", "Research Projects"]
+    },
+    {
+      "name": "Deep Learning Engineer",
+      "category": "AI/ML",
+      "description": "Builds neural-network-based systems for applications such as computer vision, speech processing and natural language processing.",
+      "technical_skills": ["Python", "Deep Learning", "Neural Networks", "PyTorch", "TensorFlow", "Computer Vision", "NLP", "Mathematics"],
+      "soft_skills": ["Analytical Thinking", "Problem Solving", "Research Skills", "Teamwork"],
+      "qualifications": ["B.Tech", "M.Tech", "M.Sc", "MCA"],
+      "recommended_learning": ["Python", "Linear Algebra", "Neural Networks", "PyTorch", "Computer Vision", "Natural Language Processing"]
+    },
+
+    {
+      "name": "Software Engineer",
+      "category": "Software Development",
+      "description": "Designs, develops, tests and maintains software applications and systems.",
+      "technical_skills": ["Java", "Python", "C++", "Data Structures", "Algorithms", "OOP", "SQL", "Git"],
+      "soft_skills": ["Problem Solving", "Teamwork", "Communication", "Critical Thinking"],
+      "qualifications": ["B.Tech", "B.Sc", "M.Tech", "MCA"],
+      "recommended_learning": ["Programming Fundamentals", "Data Structures and Algorithms", "Object-Oriented Programming", "Database Management", "Software Engineering", "Building Projects"]
+    },
+    {
+      "name": "Frontend Developer",
+      "category": "Software Development",
+      "description": "Builds the visual and interactive parts of websites and web applications.",
+      "technical_skills": ["HTML", "CSS", "JavaScript", "React", "Responsive Design", "Git", "UI Design"],
+      "soft_skills": ["Creativity", "Attention to Detail", "Problem Solving", "Communication"],
+      "qualifications": ["B.Tech", "B.Sc", "MCA", "M.Tech"],
+      "recommended_learning": ["HTML", "CSS", "JavaScript", "Responsive Web Design", "React", "Frontend Projects"]
+    },
+    {
+      "name": "Backend Developer",
+      "category": "Software Development",
+      "description": "Develops server-side application logic, APIs, databases and application infrastructure.",
+      "technical_skills": ["Python", "Java", "Django", "Flask", "SQL", "REST APIs", "Git", "Database Design"],
+      "soft_skills": ["Problem Solving", "Analytical Thinking", "Teamwork", "Communication"],
+      "qualifications": ["B.Tech", "B.Sc", "MCA", "M.Tech"],
+      "recommended_learning": ["Python or Java", "Backend Frameworks", "SQL", "REST API Development", "Authentication", "Backend Projects"]
+    },
+    {
+      "name": "Full Stack Developer",
+      "category": "Software Development",
+      "description": "Develops complete web applications by working on both frontend and backend technologies.",
+      "technical_skills": ["HTML", "CSS", "JavaScript", "Python", "Django", "Flask", "SQL", "REST APIs", "Git"],
+      "soft_skills": ["Problem Solving", "Creativity", "Teamwork", "Communication"],
+      "qualifications": ["B.Tech", "B.Sc", "MCA", "M.Tech"],
+      "recommended_learning": ["HTML and CSS", "JavaScript", "Frontend Development", "Python", "Django or Flask", "Database Management", "Full Stack Projects"]
+    },
+    {
+      "name": "Security Engineer",
+      "category": "Cybersecurity",
+      "description": "Designs and maintains systems that protect applications, networks and organizational data.",
+      "technical_skills": ["Networking", "Linux", "Python", "Cybersecurity", "Firewalls", "Encryption", "System Security"],
+      "soft_skills": ["Analytical Thinking", "Problem Solving", "Attention to Detail", "Communication"],
+      "qualifications": ["B.Tech", "B.Sc", "M.Tech", "MCA"],
+      "recommended_learning": ["Computer Networks", "Linux", "Security Fundamentals", "Cryptography", "Network Security", "Security Labs"]
+    },
+
+    {
+      "name": "Cybersecurity Analyst",
+      "category": "Cybersecurity",
+      "description": "Monitors systems, investigates security incidents and identifies vulnerabilities to protect organizational information.",
+      "technical_skills": ["Networking", "Linux", "Python", "SIEM", "Threat Analysis", "Cybersecurity", "Incident Response"],
+      "soft_skills": ["Analytical Thinking", "Attention to Detail", "Problem Solving", "Communication"],
+      "qualifications": ["B.Tech", "B.Sc", "M.Tech", "MCA"],
+      "recommended_learning": ["Networking Fundamentals", "Linux", "Cybersecurity Fundamentals", "SIEM Tools", "Threat Detection", "Security Labs"]
+    },
+    {
+      "name": "Ethical Hacker",
+      "category": "Cybersecurity",
+      "description": "Performs authorized security testing to discover vulnerabilities before malicious attackers exploit them.",
+      "technical_skills": ["Networking", "Linux", "Python", "Penetration Testing", "Kali Linux", "Web Security", "Cryptography"],
+      "soft_skills": ["Problem Solving", "Critical Thinking", "Research Skills", "Attention to Detail"],
+      "qualifications": ["B.Tech", "B.Sc", "M.Tech", "MCA"],
+      "recommended_learning": ["Networking", "Linux", "Python", "Web Application Security", "Penetration Testing", "Ethical Hacking Labs"]
+    },
+    {
+      "name": "Business Analyst",
+      "category": "Data Science",
+      "description": "Studies business processes and data to identify problems and recommend improvements.",
+      "technical_skills": ["Excel", "SQL", "Power BI", "Tableau", "Statistics", "Data Analysis", "Business Intelligence"],
+      "soft_skills": ["Communication", "Analytical Thinking", "Critical Thinking", "Problem Solving"],
+      "qualifications": ["B.Tech", "BBA", "B.Com", "MBA", "MCA"],
+      "recommended_learning": ["Excel", "SQL", "Business Analysis", "Statistics", "Power BI", "Business Case Studies"]
+    },
+
+    {
+      "name": "Business Manager",
+      "category": "Management",
+      "description": "Plans business operations, manages teams and resources, and works toward organizational goals.",
+      "technical_skills": ["Excel", "Business Strategy", "Financial Analysis", "Project Management", "Data Analysis"],
+      "soft_skills": ["Leadership", "Communication", "Decision Making", "Teamwork"],
+      "qualifications": ["BBA", "MBA", "B.Com", "B.Tech"],
+      "recommended_learning": ["Business Fundamentals", "Financial Management", "Leadership", "Strategic Planning", "Project Management", "Business Case Studies"]
+    },
+    {
+      "name": "Project Manager",
+      "category": "Management",
+      "description": "Plans projects, coordinates teams, manages timelines and ensures project goals are achieved.",
+      "technical_skills": ["Project Management", "Agile", "Scrum", "Jira", "Excel", "Risk Management"],
+      "soft_skills": ["Leadership", "Communication", "Organization", "Problem Solving"],
+      "qualifications": ["B.Tech", "BBA", "MBA", "MCA"],
+      "recommended_learning": ["Project Planning", "Agile Methodologies", "Scrum", "Risk Management", "Team Leadership", "Project Simulations"]
+    },
+    {
+      "name": "Operations Manager",
+      "category": "Management",
+      "description": "Improves daily business operations, manages resources and ensures efficient organizational processes.",
+      "technical_skills": ["Excel", "Data Analysis", "Process Optimization", "Project Management", "Operations Management"],
+      "soft_skills": ["Leadership", "Decision Making", "Problem Solving", "Communication"],
+      "qualifications": ["BBA", "MBA", "B.Tech", "B.Com"],
+      "recommended_learning": ["Operations Management", "Business Analytics", "Process Improvement", "Supply Chain Fundamentals", "Leadership", "Operations Case Studies"]
+    },
+
+    {
+      "name": "UI/UX Designer",
+      "category": "Design",
+      "description": "Designs user-friendly digital experiences by researching user needs and creating intuitive interfaces.",
+      "technical_skills": ["Figma", "Wireframing", "Prototyping", "UI Design", "UX Research", "Adobe XD", "HTML", "CSS"],
+      "soft_skills": ["Creativity", "Empathy", "Communication", "Problem Solving"],
+      "qualifications": ["B.Des", "B.Tech", "B.Sc", "BFA"],
+      "recommended_learning": ["Design Fundamentals", "Figma", "Wireframing", "Prototyping", "UX Research", "Portfolio Projects"]
+    },
+    {
+      "name": "Graphic Designer",
+      "category": "Design",
+      "description": "Creates visual content and graphics for brands, websites, advertisements and digital media.",
+      "technical_skills": ["Adobe Photoshop", "Adobe Illustrator", "Canva", "Typography", "Color Theory", "Visual Design"],
+      "soft_skills": ["Creativity", "Communication", "Attention to Detail", "Time Management"],
+      "qualifications": ["B.Des", "BFA", "B.Sc", "12th"],
+      "recommended_learning": ["Design Fundamentals", "Typography", "Color Theory", "Photoshop", "Illustrator", "Creative Portfolio"]
+    },
+    {
+      "name": "Product Designer",
+      "category": "Design",
+      "description": "Designs complete product experiences by combining user research, visual design and product thinking.",
+      "technical_skills": ["Figma", "Prototyping", "UX Research", "UI Design", "Wireframing", "Product Strategy", "Design Systems"],
+      "soft_skills": ["Creativity", "Empathy", "Critical Thinking", "Communication"],
+      "qualifications": ["B.Des", "B.Tech", "B.Sc", "BFA"],
+      "recommended_learning": ["Design Thinking", "User Research", "Figma", "Prototyping", "Product Design", "Case Study Projects"]
+    },
+
+    {
+      "name": "Marketing Executive",
+      "category": "Marketing",
+      "description": "Develops and executes marketing campaigns to promote products, services and brands.",
+      "technical_skills": ["Digital Marketing", "Market Research", "Social Media Marketing", "SEO", "Content Marketing", "Google Analytics"],
+      "soft_skills": ["Communication", "Creativity", "Persuasion", "Time Management"],
+      "qualifications": ["BBA", "MBA", "B.Com", "BA"],
+      "recommended_learning": ["Marketing Fundamentals", "Market Research", "Digital Marketing", "Brand Management", "Campaign Planning", "Marketing Projects"]
+    },
+    {
+      "name": "SEO Analyst",
+      "category": "Marketing",
+      "description": "Improves website visibility in search engines through keyword research, technical SEO and content optimization.",
+      "technical_skills": ["SEO", "Keyword Research", "Google Analytics", "Google Search Console", "Technical SEO", "Content Optimization", "HTML"],
+      "soft_skills": ["Analytical Thinking", "Research", "Problem Solving", "Communication"],
+      "qualifications": ["BBA", "BCA", "B.Tech", "BA", "B.Com"],
+      "recommended_learning": ["SEO Fundamentals", "Keyword Research", "On-Page SEO", "Technical SEO", "Google Search Console", "SEO Audits"]
+    },
+    {
+      "name": "Digital Marketing Specialist",
+      "category": "Marketing",
+      "description": "Plans and manages online marketing campaigns across search engines, social media, email and other digital channels.",
+      "technical_skills": ["SEO", "SEM", "Google Ads", "Social Media Marketing", "Email Marketing", "Google Analytics", "Content Marketing"],
+      "soft_skills": ["Creativity", "Communication", "Analytical Thinking", "Adaptability"],
+      "qualifications": ["BBA", "MBA", "B.Com", "BCA", "BA"],
+      "recommended_learning": ["Digital Marketing Fundamentals", "Google Ads", "SEO", "Social Media Strategy", "Email Marketing", "Campaign Analytics"]
+    }
+
+
+
+
+
+  ]
+  
+}
+

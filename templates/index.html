@@ -1,68 +1,679 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SkillGraph AI</title>
-  <style>
-    body { font-family: Arial, sans-serif; max-width: 680px; margin: 40px auto; padding: 0 18px; color: #182230; }
-    h1 { margin-bottom: 8px; }
-    p { color: #526071; }
-    form { display: grid; gap: 14px; margin-top: 24px; }
-    label { display: grid; gap: 6px; font-weight: 600; }
-    input { padding: 10px; border: 1px solid #b8c2cc; border-radius: 6px; font: inherit; }
-    button { padding: 11px; border: 0; border-radius: 6px; background: #2457c5; color: white; font-size: 1rem; cursor: pointer; }
-    .message { padding: 12px; border-radius: 6px; margin-top: 18px; }
-    .error { background: #fff0f0; color: #9d1c1c; }
-    .success { background: #effaf2; color: #176534; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillGraph AI | Career Intelligence</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: #080811;
+            color: #f4f2ff;
+            min-height: 100vh;
+            padding: 35px 18px;
+        }
+
+        .container {
+            max-width: 1050px;
+            margin: auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 38px;
+        }
+
+        .logo {
+            font-size: 13px;
+            letter-spacing: 3px;
+            color: #a78bfa;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: clamp(32px, 6vw, 48px);
+            letter-spacing: -1.5px;
+        }
+
+        h1 span {
+            color: #a78bfa;
+        }
+
+        .subtitle {
+            color: #9995ad;
+            margin-top: 12px;
+            line-height: 1.6;
+        }
+
+        .panel {
+            background: #11111e;
+            border: 1px solid #25243a;
+            border-radius: 18px;
+            padding: 30px;
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 19px;
+            margin-bottom: 22px;
+            color: #c4b5fd;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+        }
+
+        .field.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #d5d1e7;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 13px 14px;
+            background: #191929;
+            border: 1px solid #34334c;
+            border-radius: 9px;
+            color: white;
+            font-size: 14px;
+            outline: none;
+        }
+
+        input:focus, select:focus {
+            border-color: #9b7cff;
+            box-shadow: 0 0 0 3px #9b7cff20;
+        }
+
+        select option {
+            background: #191929;
+        }
+
+        select[multiple] {
+            min-height: 125px;
+        }
+
+        .hint {
+            font-size: 11px;
+            color: #858198;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(100deg, #7654ed, #a06bfa);
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 25px;
+            transition: 0.2s;
+        }
+
+        .submit-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: wait;
+            transform: none;
+        }
+
+        #status {
+            margin-top: 18px;
+            text-align: center;
+            font-size: 14px;
+            color: #c4b5fd;
+        }
+
+        .error {
+            color: #ff8585 !important;
+        }
+
+        #results {
+            display: none;
+        }
+
+        .result-card {
+            background: #191929;
+            border: 1px solid #34334c;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 14px;
+        }
+
+        .result-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 14px;
+        }
+
+        .rank {
+            color: #a78bfa;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 7px;
+        }
+
+        .career {
+            font-size: 19px;
+            font-weight: 700;
+        }
+
+        .percentage {
+            color: #c4b5fd;
+            font-size: 20px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .bar {
+            height: 7px;
+            background: #34334c;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #7654ed, #b18aff);
+            border-radius: 10px;
+        }
+
+        .footer {
+            text-align: center;
+            color: #77738d;
+            font-size: 12px;
+            margin-top: 35px;
+        }
+
+        @media(max-width: 650px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .panel {
+                padding: 20px;
+            }
+
+            .field.full {
+                grid-column: auto;
+            }
+        }
+    </style>
 </head>
+
 <body>
-  <h1>SkillGraph AI</h1>
-  <p>Enter your profile to begin exploring career guidance.</p>
 
-  <form method="post">
-    <label>
-      CGPA (0–10)
-      <input name="cgpa" type="number" min="0" max="10" step="0.01"
-             value="{{ profile.cgpa }}" required>
-    </label>
+<div class="container">
 
-    <label>
-      Technical skills (comma-separated)
-      <input name="skills" type="text" placeholder="Python, SQL, Machine Learning"
-             value="{{ profile.skills }}" required>
-    </label>
+    <header>
+        <div class="logo">SKILLGRAPH AI</div>
+        <h1>Discover Your <span>Career Path.</span></h1>
+        <p class="subtitle">
+            AI-powered career recommendations based on your skills,
+            education, experience and interests.
+        </p>
+    </header>
 
-    <label>
-      Number of projects
-      <input name="projects" type="number" min="0" step="1"
-             value="{{ profile.projects }}" required>
-    </label>
+    <form id="careerForm">
 
-    <label>
-      Number of internships
-      <input name="internships" type="number" min="0" step="1"
-             value="{{ profile.internships }}" required>
-    </label>
+        <!-- ACADEMIC DETAILS -->
+        <section class="panel">
+            <h2 class="section-title">01. Academic Details</h2>
 
-    <label>
-      Number of certifications
-      <input name="certifications" type="number" min="0" step="1"
-             value="{{ profile.certifications }}" required>
-    </label>
+            <div class="grid">
 
-    <button type="submit">Submit profile</button>
-  </form>
+                <div class="field">
+                    <label for="cgpa">CGPA (out of 10)</label>
+                    <input id="cgpa" type="number"
+                           min="0" max="10" step="0.01"
+                           placeholder="Example: 8.2" required>
+                    <span class="hint">Converted to percentage for the model.</span>
+                </div>
 
-  {% if error %}
-    <div class="message error">{{ error }}</div>
-  {% endif %}
+                <div class="field">
+                    <label for="qualification">Highest Qualification</label>
+                    <select id="qualification" required>
+                        <option value="">Select qualification</option>
+                        <option>B.Tech</option>
+                        <option>B.Sc</option>
+                        <option>12th</option>
+                        <option>MBA</option>
+                        <option>M.Sc</option>
+                        <option>MCA</option>
+                        <option>M.Tech</option>
+                        <option>10th</option>
+                    </select>
+                </div>
 
-  {% if submitted %}
-    <div class="message success">
-      Profile accepted. Career prediction and skill-gap analysis will be added in later phases.
+                <div class="field">
+                    <label for="stream">Stream</label>
+                    <select id="stream" required>
+                        <option value="">Select stream</option>
+                        <option>ECE</option>
+                        <option>BBA</option>
+                        <option>Civil</option>
+                        <option>Mechanical</option>
+                        <option>EEE</option>
+                        <option>IT</option>
+                        <option>Commerce</option>
+                        <option>CSE</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="academic">Current Academic Level</label>
+                    <select id="academic" required>
+                        <option value="">Select level</option>
+                        <option>Student</option>
+                        <option>Working Professional</option>
+                        <option>Graduate</option>
+                    </select>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SKILLS -->
+        <section class="panel">
+            <h2 class="section-title">02. Skills & Certifications</h2>
+
+            <div class="grid">
+
+                <div class="field full">
+                    <label for="technical">Technical Skills</label>
+                    <select id="technical" multiple required>
+                        <option>Python</option>
+                        <option>Java</option>
+                        <option>C++</option>
+                        <option>JavaScript</option>
+                        <option>HTML/CSS</option>
+                        <option>SQL</option>
+                        <option>React</option>
+                        <option>Node.js</option>
+                        <option>Data Analysis</option>
+                    </select>
+                    <span class="hint">Hold Cmd on Mac to select multiple options.</span>
+                </div>
+
+                <div class="field">
+                    <label for="soft">Soft Skills</label>
+                    <select id="soft" multiple>
+                        <option>Communication</option>
+                        <option>Creativity</option>
+                        <option>Leadership</option>
+                        <option>Problem Solving</option>
+                        <option>Teamwork</option>
+                        <option>Time Management</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="languages">Languages Known</label>
+                    <select id="languages" multiple>
+                        <option>English</option>
+                        <option>Hindi</option>
+                        <option>Kannada</option>
+                        <option>Marathi</option>
+                        <option>Tamil</option>
+                        <option>Telugu</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="certifications">Certifications</label>
+                    <select id="certifications" multiple>
+                        <option>AWS</option>
+                        <option>Azure</option>
+                        <option>Data Science</option>
+                        <option>Full Stack Development</option>
+                        <option>GCP</option>
+                        <option>Machine Learning</option>
+                        <option>Python</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="gained">Skills Gained</label>
+                    <select id="gained" multiple>
+                        <option>Data Analysis</option>
+                        <option>Leadership</option>
+                        <option>Problem Solving</option>
+                        <option>Programming</option>
+                        <option>Project Management</option>
+                        <option>Teamwork</option>
+                    </select>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CAREER PREFERENCES -->
+        <section class="panel">
+            <h2 class="section-title">03. Career Preferences</h2>
+
+            <div class="grid">
+
+                <div class="field">
+                    <label for="interest">Fields of Interest</label>
+                    <select id="interest" required>
+                        <option value="">Select interest</option>
+                        <option>Data Science</option>
+                        <option>Software Development</option>
+                        <option>AI/ML</option>
+                        <option>Marketing</option>
+                        <option>Cybersecurity</option>
+                        <option>Design</option>
+                        <option>Management</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="workstyle">Preferred Work Style</label>
+                    <select id="workstyle" required>
+                        <option value="">Select work style</option>
+                        <option>Remote</option>
+                        <option>Office</option>
+                        <option>Field Work</option>
+                        <option>Hybrid</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="worktype">Work Type Interest</label>
+                    <select id="worktype" required>
+                        <option value="">Select work type</option>
+                        <option>Technical</option>
+                        <option>Creative</option>
+                        <option>Social</option>
+                        <option>Analytical</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="relocate">Willing to Relocate?</label>
+                    <select id="relocate" required>
+                        <option value="">Select option</option>
+                        <option>Yes</option>
+                        <option>No</option>
+                    </select>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- EXPERIENCE -->
+        <section class="panel">
+            <h2 class="section-title">04. Experience & Achievements</h2>
+
+            <div class="grid">
+
+                <div class="field">
+                    <label for="experience">Past Jobs / Internships</label>
+                    <select id="experience">
+                        <option value="None yet">None yet</option>
+                        <option value="">Select experience</option>
+                        <option>Part-time Job</option>
+                        <option>Freelance Project</option>
+                        <option>Internship at XYZ</option>
+                        <option>Research Assistant</option>
+                        <option>Startup Experience</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="achievement">Achievements</label>
+                    <select id="achievement">
+                        <option value="None yet">None yet</option>
+                        <option value="">Select achievement</option>
+                        <option>Top Performer</option>
+                        <option>Employee of the Month</option>
+                        <option>Awarded Best Project</option>
+                        <option>Published Paper</option>
+                        <option>Hackathon Winner</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <button class="submit-btn" id="submitBtn" type="submit">
+                Generate My Career Predictions →
+            </button>
+
+            <div id="status" role="status"></div>
+        </section>
+
+    </form>
+
+    <!-- RESULTS -->
+    <section class="panel" id="results">
+        <h2 class="section-title">Your Career Recommendations</h2>
+        <p class="subtitle" style="margin-bottom:22px">
+            Based on your profile, here are your top 5 career recommendations.
+        </p>
+        <div id="resultList"></div>
+    </section>
+
+    <div class="footer">
+        SkillGraph AI · Intelligent Career Guidance
     </div>
-  {% endif %}
+
+</div>
+
+<script>
+    
+const form = document.getElementById("careerForm");
+const submitBtn = document.getElementById("submitBtn");
+const statusBox = document.getElementById("status");
+const resultsBox = document.getElementById("results");
+const resultList = document.getElementById("resultList");
+
+function selectedValues(id) {
+    return Array.from(
+        document.getElementById(id).selectedOptions
+    ).map(option => option.value);
+}
+
+function createList(title, items) {
+    const section = document.createElement("div");
+    section.style.marginTop = "15px";
+
+    const heading = document.createElement("h4");
+    heading.textContent = title;
+    heading.style.color = "#c4b5fd";
+    heading.style.marginBottom = "8px";
+
+    const content = document.createElement("p");
+    content.style.color = "#aaa5bd";
+    content.style.fontSize = "13px";
+    content.style.lineHeight = "1.8";
+
+    content.textContent = items && items.length
+        ? items.join(" · ")
+        : "No items available.";
+
+    section.append(heading, content);
+    return section;
+}
+
+function displayResults(results) {
+    resultList.innerHTML = "";
+
+    results.forEach((result, index) => {
+        const card = document.createElement("div");
+        card.className = "result-card";
+
+        const top = document.createElement("div");
+        top.className = "result-top";
+
+        const info = document.createElement("div");
+
+        const rank = document.createElement("div");
+        rank.className = "rank";
+        rank.textContent = "RANK #" + (index + 1);
+
+        const career = document.createElement("div");
+        career.className = "career";
+        career.textContent = result.career;
+
+        info.append(rank, career);
+
+        const percentage = document.createElement("div");
+        percentage.className = "percentage";
+        percentage.textContent = result.match_percentage + "%";
+
+        top.append(info, percentage);
+
+        const description = document.createElement("p");
+        description.textContent = result.description;
+        description.style.color = "#aaa5bd";
+        description.style.fontSize = "13px";
+        description.style.lineHeight = "1.6";
+        description.style.marginBottom = "15px";
+
+        const bar = document.createElement("div");
+        bar.className = "bar";
+
+        const fill = document.createElement("div");
+        fill.className = "bar-fill";
+        fill.style.width = Math.max(
+            0,
+            Math.min(100, result.match_percentage)
+        ) + "%";
+
+        bar.appendChild(fill);
+
+        const category = document.createElement("p");
+        category.textContent = "Category: " + result.category;
+        category.style.color = "#a78bfa";
+        category.style.fontSize = "12px";
+        category.style.marginTop = "12px";
+
+        card.append(top, description, bar, category);
+
+        card.append(
+            createList("Matched Skills", result.matched_skills),
+            createList("Skills to Improve", result.missing_skills),
+            createList("Recommended Learning", result.recommended_learning),
+            createList("Career Guidance", result.guidance)
+        );
+
+        resultList.appendChild(card);
+    });
+}
+
+form.addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    const profile = {
+        Technical_Skills: selectedValues("technical"),
+        Soft_Skills: selectedValues("soft"),
+        Languages_Known: selectedValues("languages"),
+        Certifications: selectedValues("certifications"),
+        Skills_Gained: selectedValues("gained"),
+
+        Highest_qualification:
+            document.getElementById("qualification").value,
+
+        Stream: document.getElementById("stream").value,
+
+        Current_Academic_Level:
+            document.getElementById("academic").value,
+
+        Fields_of_Interest:
+            document.getElementById("interest").value,
+
+        Preferred_Work_Style:
+            document.getElementById("workstyle").value,
+
+        Work_Type_Interest:
+            document.getElementById("worktype").value,
+
+        Past_Jobs_Internships:
+            document.getElementById("experience").value || "None yet",
+
+        Achievements:
+            document.getElementById("achievement").value || "None yet",
+
+        Willing_to_Relocate:
+            document.getElementById("relocate").value
+    };
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Analyzing Your Profile...";
+    statusBox.textContent = "Finding suitable career paths...";
+    statusBox.className = "";
+    resultsBox.style.display = "none";
+
+    try {
+        const response = await fetch("/api/predict", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(profile)
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || "Recommendation failed.");
+        }
+
+        if (!Array.isArray(data.results)) {
+            throw new Error("Unexpected recommendation response.");
+        }
+
+        displayResults(data.results);
+
+        resultsBox.style.display = "block";
+        statusBox.textContent =
+            "Your career recommendations are ready!";
+
+        resultsBox.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+    } catch (error) {
+        statusBox.textContent = error.message;
+        statusBox.className = "error";
+
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Generate My Career Recommendations →";
+    }
+});
+
+</script>
+
 </body>
 </html>

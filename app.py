@@ -1,47 +1,17 @@
+
 import json
 import sqlite3
 from datetime import datetime
 from pathlib import Path
-from ml_utils import flatten_column
-import joblib
-import pandas as pd
+
 from flask import Flask, jsonify, render_template, request
+
+from recommendation_engine import recommend_careers
 
 app = Flask(__name__)
 
 ROOT = Path(__file__).resolve().parent
-MODEL_FILE = ROOT / "models" / "career_model.joblib"
 DATABASE_FILE = ROOT / "skillgraph.db"
-
-if not MODEL_FILE.exists():
-    raise FileNotFoundError(
-        "Model not found. Run train_model.py before starting the Flask app."
-    )
-
-model_bundle = joblib.load(MODEL_FILE)
-model = model_bundle["model"]
-FEATURE_COLUMNS = model_bundle["feature_columns"]
-
-TEXT_FIELDS = {
-    "Technical_Skills",
-    "Soft_Skills",
-    "Languages_Known",
-    "Certifications",
-    "Skills_Gained",
-}
-
-REQUIRED_FIELDS = {
-    "Highest_qualification",
-    "Stream",
-    "Current_Academic_Level",
-    "Grade_CGPA_Percentage",
-    "Fields_of_Interest",
-    "Preferred_Work_Style",
-    "Work_Type_Interest",
-    "Past_Jobs_Internships",
-    "Achievements",
-    "Willing_to_Relocate",
-}
 
 
 def create_database():
@@ -58,64 +28,61 @@ def create_database():
         )
 
 
-def clean_value(value):
-    if isinstance(value, list):
-        return ", ".join(str(item).strip() for item in value if str(item).strip())
-
-    return str(value or "").strip()
-
-
 def validate_profile(data):
+    if not isinstance(data, dict):
+        raise ValueError("Send profile data as JSON.")
+
     profile = {
-        column: clean_value(data.get(column))
-        for column in FEATURE_COLUMNS
+        key: value
+        for key, value in data.items()
     }
 
+    required_fields = [
+        "Highest_qualification",
+        "Current_Academic_Level",
+        "Fields_of_Interest",
+    ]
+
     missing = [
-        field for field in REQUIRED_FIELDS
+        field for field in required_fields
         if not profile.get(field)
     ]
 
     if missing:
         raise ValueError(
-            "Missing required field(s): " + ", ".join(sorted(missing))
+            "Please provide: " + ", ".join(missing)
         )
 
-    grade = float(profile["Grade_CGPA_Percentage"])
+    if profile["Current_Academic_Level"] not in [
+        "Student",
+        "Graduate",
+        "Working Professional"
+    ]:
+        raise ValueError("Please select a valid academic level.")
 
-    if not 0 <= grade <= 100:
-        raise ValueError("Grade_CGPA_Percentage must be between 0 and 100.")
+    skills = profile.get("Technical_Skills", [])
 
-    profile["Grade_CGPA_Percentage"] = grade
+    if isinstance(skills, str):
+        skills = [
+            skill.strip()
+            for skill in skills.split(",")
+            if skill.strip()
+        ]
 
-    if not profile["Technical_Skills"]:
-        raise ValueError("Select at least one technical skill.")
+    if not isinstance(skills, list):
+        raise ValueError("Technical skills must be a list.")
+
+    profile["Technical_Skills"] = skills
 
     return profile
-
-
-def predict_careers(profile):
-    input_data = pd.DataFrame([profile], columns=FEATURE_COLUMNS)
-
-    probabilities = model.predict_proba(input_data)[0]
-    labels = model.classes_
-    top_indexes = probabilities.argsort()[-3:][::-1]
-
-    return [
-        {
-            "rank": rank,
-            "career": labels[index],
-            "confidence": round(float(probabilities[index] * 100), 2),
-        }
-        for rank, index in enumerate(top_indexes, start=1)
-    ]
 
 
 def save_prediction(profile, results):
     with sqlite3.connect(DATABASE_FILE) as connection:
         cursor = connection.execute(
             """
-            INSERT INTO predictions (created_at, profile_json, results_json)
+            INSERT INTO predictions
+            (created_at, profile_json, results_json)
             VALUES (?, ?, ?)
             """,
             (
@@ -124,23 +91,13 @@ def save_prediction(profile, results):
                 json.dumps(results),
             ),
         )
+
         return cursor.lastrowid
 
 
 @app.route("/", methods=["GET"])
 def home():
-    return render_template(
-        "index.html",
-        profile={
-            "cgpa": "",
-            "skills": "",
-            "projects": "",
-            "internships": "",
-            "certifications": "",
-        },
-        error=None,
-        submitted=False,
-    )
+    return render_template("index.html")
 
 
 @app.route("/api/predict", methods=["POST"])
@@ -148,33 +105,33 @@ def predict():
     try:
         data = request.get_json()
 
-        if not isinstance(data, dict):
-            raise ValueError("Send profile data as JSON.")
-
         profile = validate_profile(data)
-        results = predict_careers(profile)
+
+        results = recommend_careers(profile, top_n=5)
+
         prediction_id = save_prediction(profile, results)
 
-        return jsonify(
-            {
-                "prediction_id": prediction_id,
-                "results": results,
-            }
-        )
+        return jsonify({
+            "prediction_id": prediction_id,
+            "results": results,
+        })
 
     except ValueError as error:
         return jsonify({"error": str(error)}), 400
 
-    except Exception:
-        return jsonify(
-            {"error": "Prediction failed. Check the submitted profile data."}
-        ), 500
+    except Exception as error:
+        app.logger.exception("Career recommendation failed")
+
+        return jsonify({
+            "error": "Recommendation failed. Please check the server logs."
+        }), 500
 
 
 @app.route("/api/predictions", methods=["GET"])
 def prediction_history():
     with sqlite3.connect(DATABASE_FILE) as connection:
         connection.row_factory = sqlite3.Row
+
         rows = connection.execute(
             """
             SELECT id, created_at, results_json

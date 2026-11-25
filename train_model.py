@@ -1,6 +1,7 @@
 import json
 from pathlib import Path
 import numpy as np
+from ml_utils import flatten_column
 
 import joblib
 import pandas as pd
